@@ -143,6 +143,7 @@ def _grab_best_device(use_gpu=True):
 
 
 def _download(from_hf_path, file_name, to_local_path):
+    print(f'@@@ downloading from {from_hf_path} to local path {to_local_path} file name {file_name}')
     to_local_path = to_local_path.replace("\\", "/")
     path = '/'.join(to_local_path.split("/")[:-1])
     os.makedirs(path, exist_ok=True)

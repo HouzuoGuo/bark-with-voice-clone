@@ -11,6 +11,7 @@ import numpy as np
 
 
 def load_audio(file, sr):
+    print(f'@@@@@ trying to load audio from file {file} and sampling rate {sr}')
     try:
         # https://github.com/openai/whisper/blob/main/whisper/audio.py#L26
         # This launches a subprocess to decode audio while down-mixing and resampling as necessary.
@@ -110,8 +111,8 @@ class Config:
 now_dir=os.getcwd()
 sys.path.append(now_dir)
 sys.path.append(os.path.join(now_dir,"Retrieval-based-Voice-Conversion-WebUI"))
-from vc_infer_pipeline import VC
-from lib.infer_pack.models import SynthesizerTrnMs256NSFsid, SynthesizerTrnMs256NSFsid_nono, SynthesizerTrnMs768NSFsid, SynthesizerTrnMs768NSFsid_nono
+from modules import VC
+from infer.lib.infer_pack.models import SynthesizerTrnMs256NSFsid, SynthesizerTrnMs256NSFsid_nono, SynthesizerTrnMs768NSFsid, SynthesizerTrnMs768NSFsid_nono
 from fairseq import checkpoint_utils
 from scipy.io import wavfile
 
@@ -165,5 +166,9 @@ def get_vc(model_path, device_, is_half_):
     net_g.eval().to(device)
     if (is_half):net_g = net_g.half()
     else:net_g = net_g.float()
-    vc = VC(tgt_sr, config)
+    print(f"@@@@ instantiating VC, tgt_sr {tgt_sr}, config {config}")
+    # vc = VC(tgt_sr, config)
+    vc = VC(config)
+    vc.tgt_sr = tgt_sr
     n_spk=cpt["config"][-3]
+    return vc
