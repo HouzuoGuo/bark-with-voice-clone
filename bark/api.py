@@ -36,6 +36,7 @@ def semantic_to_waveform(
     semantic_tokens: np.ndarray,
     history_prompt: Optional[str] = None,
     temp: float = 0.7,
+    fine_temp: float = 0.5,
     silent: bool = False,
     output_full: bool = False,
 ):
@@ -61,7 +62,7 @@ def semantic_to_waveform(
     fine_tokens = generate_fine(
         coarse_tokens,
         history_prompt=history_prompt,
-        temp=0.5,
+        temp=fine_temp,
     )
     audio_arr = codec_decode(fine_tokens)
     if output_full:
