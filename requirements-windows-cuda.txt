@@ -50,8 +50,8 @@ ffmpy>=0.3.1
 python-dotenv>=1.0.0
 av
 
-# A fairseq clone compatible with python 3.11, the original is stuck with 3.10.
-fairseq @ git+https://github.com/One-sixth/fairseq.git@main
+# A fairseq clone compatible with python 3.11, the upstream by facebook is stuck with 3.10.
+fairseq @ git+https://github.com/re-connect-ai/fairseq.git@main
 
 # Work around beartype too old: https://git.ecker.tech/mrq/ai-voice-cloning/issues/388
 beartype>=0.15.0
